@@ -1,0 +1,36 @@
+version: '2'
+services:
+
+  # The Application
+  app:
+    image: fielddemon/genie:latest
+    working_dir: /var/www
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=database:3306"
+
+  # The Web Server
+  web:
+    image: fielddemon/websv:latest
+    volumes_from:
+      - app
+    ports:
+      - 80:80
+    labels:
+      kompose.service.type: LoadBalancer
+
+  # The Database
+  database:
+    image: mysql:5.7.17
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_DATABASE=homestead"
+      - "MYSQL_USER=homestead"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"
+    ports:
+        - "3306:3306"
+
+volumes:
+  dbdata: 

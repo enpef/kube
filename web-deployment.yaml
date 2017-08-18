@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.service.type: LoadBalancer
+  creationTimestamp: null
+  labels:
+    io.kompose.service: web
+  name: web
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: web
+    spec:
+      containers:
+      - image: fielddemon/websv:latest
+        name: web
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}

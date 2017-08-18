@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: app
+    spec:
+      containers:
+      - env:
+        - name: DB_HOST
+          value: database:3306
+        - name: DB_PORT
+          value: "3306"
+        image: fielddemon/genie:latest
+        name: app
+        resources: {}
+        workingDir: /var/www
+      restartPolicy: Always
+status: {}
