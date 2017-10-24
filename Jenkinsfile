@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                node --version
+                ls -lah
             }
         }
     }
